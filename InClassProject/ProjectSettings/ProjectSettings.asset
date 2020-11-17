@@ -658,10 +658,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: b6c05d8a-4721-4a65-806e-3b754a62fa24
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: InClassProject
+  organizationId: mannohanze
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

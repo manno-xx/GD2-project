@@ -18,7 +18,6 @@ public class Surveyor : MonoBehaviour
 
     [Tooltip("The gameobject that represents the thief to watch out for")]
     public GameObject Thief;
-    Vector3 toThief = Vector3.zero;
 
     bool hasSeen = false;
 
@@ -38,10 +37,13 @@ public class Surveyor : MonoBehaviour
         minimumDotProduct = Mathf.Cos(Mathf.Deg2Rad * (FOV / 2));
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Checks if the 'thief' is in Field of View or not.
+    /// When that state has changed, the SeeCHange event is invoked
+    /// </summary>
     void Update()
     {
-        toThief = (Thief.transform.position - transform.position).normalized;
+        Vector3 toThief = (Thief.transform.position - transform.position).normalized;
         float currentDotProduct = Vector3.Dot(transform.forward, toThief);
         bool isSeeing = currentDotProduct >= minimumDotProduct;
 
@@ -58,10 +60,11 @@ public class Surveyor : MonoBehaviour
     }
 
     /// <summary>
-    /// Draw a Unit vector from this to the GameObject to watch.
+    /// Draw a Unit vector from this to the GameObject to watch out for.
     /// </summary>
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, toThief);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, Thief.transform.position - transform.position);
     }
 }

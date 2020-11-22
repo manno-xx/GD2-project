@@ -9,24 +9,28 @@ public class SceneStatsTracker : MonoBehaviour
 {
     int TimesSeen = 0;
 
-    float startTime = 0;
     float duration = 0;
 
     /// <summary>
-    /// 
+    /// Tell Unity we're starting Level One!
     /// </summary>
     void Start()
     {
-        startTime = Time.time;
-
         AnalyticsEvent.LevelStart("level_one");
     }
 
+    /// <summary>
+    /// Keep track of how long we remain in this scene.
+    /// </summary>
     private void Update()
     {
-        duration = Time.time - startTime;
+        duration += Time.deltaTime;
     }
 
+    /// <summary>
+    /// This handler is subcribed to the UnityEvent dispatcher of the camera (which does the 'seeing')
+    /// </summary>
+    /// <param name="IsSeen"></param>
     public void CountTimesSeen(bool IsSeen)
     {
         if (IsSeen)
@@ -35,6 +39,9 @@ public class SceneStatsTracker : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When this object is destroyed (assuming that only happens when the scene is 'closed') send an analytics event
+    /// </summary>
     void OnDestroy()
     {
         AnalyticsEvent.LevelComplete("level_one", new Dictionary<string, object> {

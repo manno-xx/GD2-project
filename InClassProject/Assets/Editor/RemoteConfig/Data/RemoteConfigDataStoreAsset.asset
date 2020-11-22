@@ -14,12 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rsKeyList:
   - metadata:
-      entityId: 01ebf136-7678-43d4-b27b-440d8d0521f0
+      entityId: a81a3ad2-39ac-44bd-82ae-4efae1927d3f
     rs:
       key: CameraRotationSpeed
       type: float
       value: 20
-  rsLastCachedKeyList: []
+  rsLastCachedKeyList:
+  - metadata:
+      entityId: a81a3ad2-39ac-44bd-82ae-4efae1927d3f
+    rs:
+      key: CameraRotationSpeed
+      type: float
+      value: 20.000000
   configId: 38d84968-1946-493f-af81-59c605c5b27a
   currentEnvironmentId: 12076be4-8cf0-42d3-a291-517b14b723c8
   environments:

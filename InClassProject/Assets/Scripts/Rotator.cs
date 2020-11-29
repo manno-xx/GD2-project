@@ -37,9 +37,9 @@ public class Rotator : MonoBehaviour
     /// <param name="configResponse"></param>
     private void ApplyRemoteSettings(ConfigResponse configResponse)
     {
-        Debug.Log(configResponse.requestOrigin);
+        //Debug.Log(configResponse.requestOrigin);
         RotationSpeed = ConfigManager.appConfig.GetFloat("CameraRotationSpeed", RotationSpeed);
-        Debug.Log(RotationSpeed);
+        //Debug.Log(RotationSpeed);
     }
 
     /// <summary>

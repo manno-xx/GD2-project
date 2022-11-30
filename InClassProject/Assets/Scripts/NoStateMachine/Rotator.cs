@@ -21,27 +21,7 @@ public struct AppAttributes
 public class Rotator : MonoBehaviour
 {
     public float RotationSpeed = 0;
-
-    /// <summary>
-    /// Get the remote config data
-    /// </summary>
-    void Awake()
-    {
-        ConfigManager.FetchCompleted += ApplyRemoteSettings;
-        ConfigManager.FetchConfigs<UserAttributes, AppAttributes>(new UserAttributes(), new AppAttributes());
-    }
-
-    /// <summary>
-    /// When the remote config data is received, apply it
-    /// </summary>
-    /// <param name="configResponse"></param>
-    private void ApplyRemoteSettings(ConfigResponse configResponse)
-    {
-        //Debug.Log(configResponse.requestOrigin);
-        RotationSpeed = ConfigManager.appConfig.GetFloat("CameraRotationSpeed", RotationSpeed);
-        //Debug.Log(RotationSpeed);
-    }
-
+    
     /// <summary>
     /// Actually rotate the camera
     /// </summary>

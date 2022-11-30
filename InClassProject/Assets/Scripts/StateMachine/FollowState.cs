@@ -16,6 +16,9 @@ public class FollowState : State
 {
     GameObject player;
 
+    public delegate void SurveyDelegate(bool doSee);
+    public static SurveyDelegate SeeChange;
+
     /// <summary>
     /// Get a reference to the Player game object (yes, there's a lot of debate on performance of the various Find...() methods
     /// </summary>
@@ -24,6 +27,8 @@ public class FollowState : State
     /// <param name="layerIndex"></param>
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        SeeChange?.Invoke(true);
+        
         player = GameObject.FindWithTag("Player");
         animator.GetComponent<Renderer>().material.color = Color.red;
     }
@@ -39,6 +44,8 @@ public class FollowState : State
     {
         if (!SeesEnemy(animator))
         {
+            SeeChange?.Invoke(false);
+            
             animator.SetInteger("CameraState", 2);
         }
         else

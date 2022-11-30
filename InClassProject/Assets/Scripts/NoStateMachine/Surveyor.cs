@@ -21,12 +21,8 @@ public class Surveyor : MonoBehaviour
 
     bool hasSeen = false;
 
-    [System.Serializable]
-    public class SurveyEvent : UnityEvent<bool>
-    {
-    }
-
-    public SurveyEvent SeeChange;
+    public delegate void SurveyDelegate(bool doSee);
+    public static SurveyDelegate SeeChange;
 
     /// <summary>
     /// Convert values from Inspector to more Computer readable info
@@ -49,12 +45,12 @@ public class Surveyor : MonoBehaviour
 
         if (isSeeing && !hasSeen)
         {
-            SeeChange.Invoke(true);
+            SeeChange?.Invoke(true);
             hasSeen = true;
         }
         else if (!isSeeing && hasSeen)
         {
-            SeeChange.Invoke(false);
+            SeeChange?.Invoke(false);
             hasSeen = false;
         }
     }

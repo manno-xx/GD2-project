@@ -12,55 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  rsKeyList:
-  - metadata:
-      entityId: 6c582a6d-15ff-4b3f-945b-54ca2cbe0bad
-    rs:
-      key: CameraRotationSpeed
-      type: float
-      value: 20
-  - metadata:
-      entityId: 7c8fe6f6-0a5e-4548-9319-40dd43b58a0e
-    rs:
-      key: MoveSpeed
-      type: float
-      value: 10
-  rsLastCachedKeyList:
-  - metadata:
-      entityId: 6c582a6d-15ff-4b3f-945b-54ca2cbe0bad
-    rs:
-      key: CameraRotationSpeed
-      type: float
-      value: 20
-  - metadata:
-      entityId: 7c8fe6f6-0a5e-4548-9319-40dd43b58a0e
-    rs:
-      key: MoveSpeed
-      type: float
-      value: 10
-  configId: 38d84968-1946-493f-af81-59c605c5b27a
-  currentEnvironmentId: 12076be4-8cf0-42d3-a291-517b14b723c8
-  environments:
-  - id: 65a831df-5686-44ab-8da2-a294e5008f56
-    appId: 
-    name: Production (Default)
-    description: 
-    createdAt: 2020-11-22T10:14:58Z
-    updatedAt: 2020-11-22T10:14:58Z
-  - id: d3775741-2dee-4221-8dda-04cb93a669ca
-    appId: 
-    name: Release
-    description: 
-    createdAt: 2020-11-22T10:25:21Z
-    updatedAt: 2020-11-22T10:25:21Z
-  - id: 12076be4-8cf0-42d3-a291-517b14b723c8
-    appId: 
-    name: Development
-    description: 
-    createdAt: 2020-11-22T10:25:21Z
-    updatedAt: 2020-11-22T10:25:21Z
-  rulesList: []
-  lastCachedRulesList: []
-  addedRulesIDs: []
-  updatedRulesIDs: []
-  deletedRulesIDs: []
+  _rsKeyList: '[]'
+  _rsLastCachedKeyList: '[]'
+  _environments: '[]'

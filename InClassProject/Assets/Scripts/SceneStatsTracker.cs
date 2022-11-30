@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
+using System.IO;
 
 /// <summary>
 /// Keeps track of the stats needed for analytics
@@ -11,12 +12,25 @@ public class SceneStatsTracker : MonoBehaviour
 
     float duration = 0;
 
+    private Sessions sessions;
+
     /// <summary>
     /// Tell Unity we're starting Level One!
     /// </summary>
     void Start()
     {
-        AnalyticsEvent.LevelStart("level_one");
+        Debug.Log(Application.dataPath);
+        ReadJSON();
+    }
+
+    private void OnEnable()
+    {
+        FollowState.SeeChange += CountTimesSeen;
+    }
+
+    private void OnDisable()
+    {
+        FollowState.SeeChange -= CountTimesSeen;
     }
 
     /// <summary>
@@ -44,11 +58,80 @@ public class SceneStatsTracker : MonoBehaviour
     /// </summary>
     void OnDestroy()
     {
-        AnalyticsEvent.LevelComplete("level_one", new Dictionary<string, object> {
-            {"times_seen", TimesSeen },
-            {"duration", duration }
-        });
+        WriteJSON();
+        AppendCSV();
+    }
 
-        Debug.Log($"duration, {duration}, times seen {TimesSeen}");
+    private void ReadJSON()
+    {
+        string path = Application.dataPath + @"/Resources/stats.txt";
+
+        // This text is added only once to the file.
+        if (File.Exists(path))
+        {
+            string contents = File.ReadAllText(path);
+            sessions = JsonUtility.FromJson<Sessions>(contents);
+        }
+    }
+    
+    /// <summary>
+    /// Write JSON to disk
+    /// </summary>
+    private void WriteJSON()
+    {
+        Level stats = new Level()
+        {
+            Duration = duration,
+            TimesSeen = TimesSeen
+        };
+        
+        sessions.sessions.Add(stats);
+
+        string path = Application.dataPath + @"/Resources/stats.txt";
+        string data = JsonUtility.ToJson(sessions);
+        
+        // Create a file to write to.
+        File.WriteAllText(path, data);
+    }
+
+    /// <summary>
+    /// append data to JSON
+    /// </summary>
+    private void AppendCSV()
+    {
+        Level stats = new Level()
+        {
+            Duration = duration,
+            TimesSeen = TimesSeen
+        };
+        string path = Application.dataPath + @"/Resources/stats.csv";
+
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, stats.ToString() + Environment.NewLine);
+        }
+        else
+        {
+            File.AppendAllText(path, stats.ToString() + Environment.NewLine);
+        }
+    }
+}
+
+[Serializable]
+class Sessions
+{
+    public List<Level> sessions;
+}
+
+[Serializable]
+class Level
+{
+    public string when = DateTime.Now.ToString();
+    public int TimesSeen = 0;
+    public float Duration = 0;
+
+    public override string ToString()
+    {
+        return $"{when}, {TimesSeen}, {Duration}";
     }
 }
